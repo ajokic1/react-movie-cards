@@ -23,8 +23,8 @@ const MovieCard = ({ movie, onDelete }) => {
         <h4 className="card-title">
           {movie.title}
           {movie.id >= 1000 && (
-            <Button onClick={onDelete} style="danger">
-              Delete
+            <Button onClick={onDelete} style="danger" className="float-right">
+              <i className="fa fa-trash-o"></i>
             </Button>
           )}
         </h4>
