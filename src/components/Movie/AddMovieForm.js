@@ -22,11 +22,11 @@ function AddMovieForm({ onCancel, dispatch }) {
   }
 
   return (
-    <form className="p-4 ">
-      <InputField name="Url" value={imageUrl} setter={setUrl}/>
-      <InputField name="Title" value={title} setter={setTitle}/>
-      <InputField name="Subtitle" value={subtitle} setter={setSubtitle}/>
-      <InputField name="Description" value={description} setter={setDescription}/>
+    <form className="p-4">
+      <InputField name="Url" value={imageUrl} setter={setUrl} required/>
+      <InputField name="Title" value={title} setter={setTitle} required/>
+      <InputField name="Subtitle" value={subtitle} setter={setSubtitle} required/>
+      <InputField name="Description" value={description} setter={setDescription} required/>
       <div className="text-center">
       <Button onClick={onAddMovie}>
         Add Movie

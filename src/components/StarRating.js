@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import MovieContext from './Movie/MovieContext';
+import { getRating } from '../services/utils';
 
 const width = 110;
 
@@ -25,7 +26,7 @@ const cropWidth = rating => {
 };
 
 const StarRating = ({ movie }) => {
-  const { rating } = movie;
+  const rating = getRating(movie.ratings);
   const containerStyle = { width: `${cropWidth(rating)}px` };
 
   const [{ movies }, moviesDispatch] = useContext(MovieContext);
@@ -45,8 +46,8 @@ const StarRating = ({ movie }) => {
   let filledStars = [];
 
   for(let i=1;i<=5;i++) {
-    emptyStars.push(<i className="fa fa-star-o fa-lg" onClick={() => rate(i)} style={styles.star}></i>);
-    filledStars.push(<i className="fa fa-star fa-lg" onClick={() => rate(i)} style={styles.star}></i>);
+    emptyStars.push(<i className="fa fa-star-o fa-lg" key={i} onClick={() => rate(i)} style={styles.star}></i>);
+    filledStars.push(<i className="fa fa-star fa-lg" key={i} onClick={() => rate(i)} style={styles.star}></i>);
   }
   return (
     <div>

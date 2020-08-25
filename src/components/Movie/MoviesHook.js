@@ -18,11 +18,12 @@ export default function useMovies() {
 
   function addRating(state,action) {
     let movies = state.movies;
-    for(const movie in movies){
-      if(movie.id === action.payload.id) {
+    movies.forEach(movie => {
+      if(movie.id == action.payload.id) {
         movie.ratings.push(action.payload.rating);
       }
-    }
+    });
+    console.log("added rating " + action.payload.rating + " to movie " + action.payload.id);
     return movies;
   }
 
