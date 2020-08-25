@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
+import MovieContext from './Movie/MovieContext';
 
 const width = 110;
 
@@ -23,26 +24,39 @@ const cropWidth = rating => {
   return Math.floor((rating * width) / 5);
 };
 
-const StarRating = ({ rating }) => {
+const StarRating = ({ movie }) => {
+  const { rating } = movie;
   const containerStyle = { width: `${cropWidth(rating)}px` };
 
+  const [{ movies }, moviesDispatch] = useContext(MovieContext);
+
+  function rate(rating) {
+    const action = {
+      type: "addRating",
+      payload: {
+        id: movie.id,
+        rating: rating
+      }
+    };
+    moviesDispatch(action);
+  }
+
+  let emptyStars = [];
+  let filledStars = [];
+
+  for(let i=1;i<=5;i++) {
+    emptyStars.push(<i className="fa fa-star-o fa-lg" onClick={() => rate(i)} style={styles.star}></i>);
+    filledStars.push(<i className="fa fa-star fa-lg" onClick={() => rate(i)} style={styles.star}></i>);
+  }
   return (
     <div>
       <div style={styles.starsOuter}>
         <div style={containerStyle}>
           <div style={styles.starsEmptyInner}>
-            <i className="fa fa-star-o fa-lg" style={styles.star}></i>
-            <i className="fa fa-star-o fa-lg" style={styles.star}></i>
-            <i className="fa fa-star-o fa-lg" style={styles.star}></i>
-            <i className="fa fa-star-o fa-lg" style={styles.star}></i>
-            <i className="fa fa-star-o fa-lg" style={styles.star}></i>
+            {emptyStars}
           </div>
           <div style={styles.starsInner}>
-            <i className="fa fa-star fa-lg" style={styles.star}></i>
-            <i className="fa fa-star fa-lg" style={styles.star}></i>
-            <i className="fa fa-star fa-lg" style={styles.star}></i>
-            <i className="fa fa-star fa-lg" style={styles.star}></i>
-            <i className="fa fa-star fa-lg" style={styles.star}></i>
+            {filledStars}
           </div>
         </div>
       </div>

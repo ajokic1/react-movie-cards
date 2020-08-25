@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 
 import StarRating from '../StarRating';
 import Button from '../partials/Button';
+import { getRating } from '../../services/utils';
 
 const MovieCard = ({ movie, onDelete }) => (
   <div>
@@ -20,9 +21,9 @@ const MovieCard = ({ movie, onDelete }) => (
     <div className="card-footer">
       <div className="clearfix">
         <div className="float-left mt-1">
-          <StarRating rating={movie.rating} />
+          <StarRating movie={movie}/>
         </div>
-        <div className="card-footer-badge float-right badge badge-primary badge-pill">{movie.rating}</div>
+        <div className="card-footer-badge float-right badge badge-primary badge-pill">{getRating(movie.ratings)}</div>
       </div>
     </div>
   </div>
