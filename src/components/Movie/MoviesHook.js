@@ -10,12 +10,19 @@ export default function useMovies() {
     return movie;
   }
 
+  function deleteMovie(state, action){
+    const movies = state.movies.filter(movie => movie.id != action.payload);
+    return {movies: movies};
+  }
+
   const movieReducer = (state, action) => {
     switch (action.type) {
       case 'addList':
         return { movies: state.movies.concat(action.payload) };
       case 'add':
         return { movies: [...state.movies, getMovie(action.payload)] };
+      case 'delete':
+        return deleteMovie(state, action);
       default:
         throw new Error();
     }

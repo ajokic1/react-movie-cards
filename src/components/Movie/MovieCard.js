@@ -2,12 +2,16 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import StarRating from '../StarRating';
+import Button from '../partials/Button';
 
-const MovieCard = ({ movie }) => (
+const MovieCard = ({ movie, onDelete }) => (
   <div>
-    <img className="card-img-top" src={movie.imageUrl} alt="" />
+    <img className="card-img-top" src={movie.imageUrl} alt=""/>
     <div className="card-body">
-      <h4 className="card-title">{movie.title}</h4>
+      <h4 className="card-title">
+        {movie.title}
+        {movie.id >= 1000 && <Button onClick={onDelete} style="danger">Delete</Button>}
+      </h4>
       <h6 className="card-subtitle mb-2 text-muted">{movie.subtitle}</h6>
       <p className="text-justify" style={{ fontSize: '14px' }}>
         {movie.description}
